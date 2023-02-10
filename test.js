@@ -16,7 +16,7 @@ moonSun.addEventListener("click", function () {
             "#fff"
         );
         document.documentElement.style.setProperty("--border-color", "#4d5066");
-        header.style.backgroundImage = "url(../../images/bg-desktop-dark.jpg)";
+        header.style.backgroundImage = "url(./images/bg-desktop-dark.jpg)";
     } else {
         this.dataset.mode = "light";
         this.firstElementChild.src = "./images/icon-moon.svg";
@@ -27,7 +27,7 @@ moonSun.addEventListener("click", function () {
             "#000"
         );
         document.documentElement.style.setProperty("--border-color", "#d2d3db");
-        header.style.backgroundImage = "url(../../images/bg-desktop-light.jpg)";
+        header.style.backgroundImage = "url(./images/bg-desktop-light.jpg)";
     }
 });
 
