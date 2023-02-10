@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Todo</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/css/style.css" />
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+        <script src="./assets/scripts/main.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div>
+                    <h1>TODO</h1>
+                    <button id="toggle-moon-light" data-mode="light">
+                        <!-- <div class="moon"></div> -->
+                        <img src="./images/icon-moon.svg" alt="" />
+                    </button>
+                </div>
+                <form>
+                    <input type="text" />
+                    <button type="submit">+</button>
+                </form>
+            </div>
+        </header>
+        <section >
+            <div class="container">
+                <div class="todos-container">
+                    <div class="todos">
+                        <div class="empty">
+                            There is nothing to do <br> <br>
+                            by the way do you know that you're amazing?
+                        </div>
+                        <!-- <div class="todo">
+                            <div class="checker">
+                                <span>
+                                    <img src="./images/icon-check.svg" alt="">
+                                </span>
+                            </div>
+                            <p>Make A todo App</p>
+                            <button class="remove">
+                                <img src="./images/icon-cross.svg" alt="">
+                            </button>
+                        </div> -->
+                        
+                    </div>
+                    <div class="todos-filter">
+                        <div class="items-count">
+                            <span id="count">0</span> items left
+                        </div>
+                        <div class="filter-controls">
+                            <button data-filter="all" class="active">All</button>
+                            <button data-filter="active">Active</button>
+                            <button data-filter="completed">Complete</button>
+                        </div>
+                        <div class="clear-completed">
+                            <button>
+                                Clear Completed
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                Made with 3> by <span style="color:#3a7bfd;">Yousef</span>
+            </footer>
+        </section>
+    </body>
+</html>

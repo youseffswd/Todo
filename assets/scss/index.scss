@@ -1,0 +1,335 @@
+//  Variables
+
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+$main-color: #79c2f4;
+$alt-color: #a578e6;
+
+$transition: 0.3s all linear;
+$radius: 10px;
+:root {
+    --bg-color: #e4e5f1;
+    --todo-color: #fff;
+    --todo-input-color: #000;
+    --border-color: #d2d3db;
+    // --border-color:#4d5066;
+}
+// Mixins
+@mixin sm {
+    @media (min-width: $sm) {
+        @content;
+    }
+}
+@mixin md {
+    @media (min-width: $md) {
+        @content;
+    }
+}
+@mixin lg {
+    @media (min-width: $lg) {
+        @content;
+    }
+}
+@mixin xl {
+    @media (min-width: $xl) {
+        @content;
+    }
+}
+
+//  Global Rules
+
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    padding: 0 12px;
+    margin: 0 auto;
+    @include sm {
+        max-width: 440px;
+    }
+    @include md {
+        max-width: 620px;
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: "Josefin Sans", sans-serif;
+    min-height: 100vh;
+    transition: $transition;
+}
+header {
+    height: 300px;
+    background-image: url(../../images/bg-desktop-light.jpg);
+    display: flex;
+    align-items: center;
+    transition: $transition;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        div {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 40px;
+            h1 {
+                color: #fff;
+                font-weight: bold;
+                letter-spacing: 2.5px;
+                font-size: 38px;
+            }
+            button {
+                background-color: transparent;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 0 0 0 10px;
+            }
+        }
+        form {
+            width: 100%;
+            position: relative;
+            input {
+                width: 100%;
+                padding: 14px 7px;
+                border: none;
+                outline: none;
+                transition: $transition;
+                background-color: var(--todo-color);
+                color: var(--todo-input-color);
+                border-radius: $radius;
+            }
+            button {
+                border-radius: $radius;
+                position: absolute;
+                position: absolute;
+                right: 0px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-weight: bold;
+                font-size: 36px;
+                border: none;
+                cursor: pointer;
+                padding: 0 10px;
+                background: var(--todo-color);
+                color: var(--todo-input-color);
+                transition: $transition;
+            }
+        }
+    }
+}
+section {
+    min-height: calc(100vh - 300px);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    .todos {
+        overflow-x: hidden;
+        .todo {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: $transition;
+
+            &:not(:last-of-type) {
+                border-bottom: 1px solid var(--border-color);
+            }
+            &.remove-todo,&.hide {
+                transform: translateX(100%);
+                height: 0px;
+                padding: 0 10px;
+                overflow: hidden;
+            }
+            &[data-status*="completed"] {
+                transition: $transition;
+                opacity: 0.5;
+                p {
+                    &::after {
+                        width: 100%;
+                    }
+                }
+                .checker {
+                    @extend %checker;
+                }
+            }
+            .checker {
+                border: 2px solid var(--border-color);
+                width: 25px;
+                height: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: $transition;
+                margin-right: 10px;
+                img {
+                    display: none;
+                }
+            }
+            p {
+                position: relative;
+                font-size: 16px;
+                color: var(--todo-input-color);
+                transition: $transition;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: calc(50% - 1px);
+                    width: 0%;
+                    height: 2px;
+                    background-color: var(--todo-input-color);
+                    transition: $transition;
+                }
+            }
+            .remove {
+                background: none;
+                outline: none;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                right: 0;
+                padding: 0 15px;
+                cursor: pointer;
+                @include lg {
+                    display: none;
+                }
+                img {
+                    pointer-events: none;
+                }
+            }
+            &:hover {
+                .checker {
+                    @extend %checker;
+                }
+                .remove {
+                    display: flex;
+                }
+            }
+        }
+        .empty {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            transition: $transition;
+            overflow: hidden;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            color: #9394a5;
+        }
+    }
+    .todos-container {
+        border-radius: $radius;
+        transition: $transition;
+        background-color: var(--todo-color);
+        margin-top: -50px;
+        .todos-filter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
+            transition: $transition;
+            font-size: 14px;
+            color: #9394a5;
+            div:first-child,
+            div:last-child {
+                display: none;
+                @include md {
+                    display: initial;
+                }
+            }
+            .filter-controls {
+                display: flex;
+                margin: 0 auto;
+                button {
+                    background-color: rgba(0, 0, 0, 0);
+                    border: none;
+                    outline: none;
+                    color: #9394a5;
+                    font-size: 14px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: $transition;
+                    &:not(:last-of-type) {
+                        margin-right: 20px;
+                    }
+                    &.active {
+                        color: #3a7bfd;
+                    }
+                }
+            }
+            .clear-completed {
+                button {
+                    background-color: rgba(0, 0, 0, 0);
+                    border: none;
+                    outline: none;
+                    color: #9394a5;
+                    font-size: 14px;
+                    cursor: pointer;
+                    transition: $transition;
+                    &:hover {
+                        color: #3a7bfd;
+                    }
+                }
+            }
+        }
+    }
+    footer {
+        text-align: center;
+        padding: 30px 0;
+        font-size: 14px;
+        color: #9394a5;
+    }
+}
+
+.swal-modal {
+    background-color: var(--todo-color);
+    .swal-title {
+        color: var(--todo-input-color);
+    }
+    .swal-text {
+        color: var(--todo-input-color);
+        opacity: 0.6;
+    }
+    button {
+        background: linear-gradient(135deg, $main-color, $alt-color);
+        border: none;
+        outline: none;
+        &:hover {
+            background: linear-gradient(-135deg, $main-color, $alt-color);
+        }
+    }
+}
+
+%checker {
+    border: none;
+    background-image: linear-gradient(
+        to right bottom,
+        #79c2f4,
+        #71b4f9,
+        #79a3f9,
+        #8c8ff4,
+        #a578e6
+    );
+    img {
+        display: block;
+    }
+}
